@@ -1,0 +1,26 @@
+# Environment / secrets
+.env
+
+# Data directory (authorized users list)
+data/
+
+# Build artifacts
+/torbox-bot
+/torbox-tg-bot
+*.exe
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test binaries
+*.test

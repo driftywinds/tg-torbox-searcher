@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: torbox-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      # Persist the authorised-users list so it survives container restarts.
+      - bot-data:/data
+
+volumes:
+  bot-data:
