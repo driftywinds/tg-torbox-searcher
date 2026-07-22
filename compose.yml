@@ -1,17 +1,18 @@
-version: "3.9"
+#version: "3.9"
 
 services:
-  bot:
-    build:
-      context: .
-      dockerfile: Dockerfile
+#  bot:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+    image: ghcr.io/driftywinds/tg-torbox-searcher
     container_name: torbox-bot
     restart: unless-stopped
     env_file:
       - .env
     volumes:
       # Persist the authorised-users list so it survives container restarts.
-      - bot-data:/data
+      - ./data:/data
 
-volumes:
-  bot-data:
+#volumes:
+#  bot-data:
