@@ -163,6 +163,14 @@ func (b *Bot) handleCommand(userID, chatID int64, text string) {
 			b.send(chatID, fmt.Sprintf("User %d wasn't authorized to begin with.", id))
 		}
 
+	case "/cancel":
+		if !b.users.IsAuthorized(userID) {
+			b.send(chatID, "You're not authorized to use this bot.")
+			return
+		}
+		b.sessions.del(chatID)
+		b.send(chatID, "❌ Cancelled. Send me a search query to start over.")
+
 	case "/listusers":
 		if !b.users.IsAdmin(userID) {
 			b.send(chatID, "Only the admin can do that.")
@@ -193,7 +201,8 @@ func helpText(isAdmin bool) string {
 		"I'll reply with a numbered list (name / size / cached status / private or public tracker). " +
 		"Just reply with the number of the one you want.\n\n" +
 		"- If it's already cached, I'll start it on TorBox and then upload it to GoFile, then send you the link.\n" +
-		"- If it's not cached yet, I'll start the download on TorBox. Reply with the same number again later to check on it and get your GoFile link once it's ready."
+		"- If it's not cached yet, I'll start the download on TorBox. Reply with the same number again later to check on it and get your GoFile link once it's ready.\n\n" +
+		"Use /cancel at any time to reset and start a new search."
 	if isAdmin {
 		base += "\n\nAdmin commands:\n" +
 			"/adduser <telegram_user_id>\n" +

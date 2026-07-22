@@ -64,3 +64,11 @@ func (s *sessionStore) get(chatID int64) *session {
 	defer s.mu.Unlock()
 	return s.sessions[chatID]
 }
+
+// del removes the session for chatID, effectively resetting the user's
+// workflow back to the initial "waiting for a search query" stage.
+func (s *sessionStore) del(chatID int64) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	delete(s.sessions, chatID)
+}
