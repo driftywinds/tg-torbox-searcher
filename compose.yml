@@ -1,12 +1,12 @@
 #version: "3.9"
 
 services:
-#  bot:
+  searcher:
 #    build:
 #      context: .
 #      dockerfile: Dockerfile
     image: ghcr.io/driftywinds/tg-torbox-searcher
-    container_name: torbox-bot
+    container_name: torbox-searcher
     restart: unless-stopped
     env_file:
       - .env
