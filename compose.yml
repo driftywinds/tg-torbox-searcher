@@ -10,6 +10,10 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    environment:
+      # Explicitly set DATA_DIR so that even if .env has a different value,
+      # the bot writes to the mounted volume and user data survives restarts.
+      - DATA_DIR=/data
     volumes:
       # Persist the authorised-users list so it survives container restarts.
       - ./data:/data
